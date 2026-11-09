@@ -86,13 +86,15 @@ if [[ -n "${FZF_URL_MEASURE:-}" && -n "${FZF_URL_CACHE:-}" && -n "${REX_BLOCK:-}
         cache="$FZF_URL_CACHE" spec="$FZF_URL_MEASURE" >/dev/null 2>&1 &
 fi
 
+# --no-border and --layout default override FZF_DEFAULT_OPTS: a border adds two
+# rows and two columns that the pane size does not count, and hides the list.
 # fzf options ported from junegunn/tmux-fzf-url's fzf-url.rb. --expect
 # reports the pressed key (ctrl-y, or empty for Enter) on the first output
 # line. The selections follow.
 # $FZF_URL_FZF_OPTIONS is intentionally unquoted: word-splitting is the point.
 # shellcheck disable=SC2086
 selection=$(printf '%s\n' "$urls" | fzf \
-    --multi --no-margin --no-padding --wrap \
+    --multi --no-margin --no-padding --no-border --layout default --wrap \
     --expect ctrl-y --style default \
     --header 'Enter: Open URL / CTRL-Y: Copy to clipboard' \
     --header-border top --header-first \

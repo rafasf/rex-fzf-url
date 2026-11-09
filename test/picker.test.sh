@@ -125,6 +125,10 @@ check_eq "height counts the URLs with no count given" "7" "$(height)"
 run "$two" FZF_URL_FZF_OPTIONS='--exact --reverse'
 check_eq "fzf_options are split into words" $'--exact\n--reverse' "$(log fzf.args | tail -2)"
 
+run "$two" FZF_DEFAULT_OPTS='--border --layout=reverse'
+check_eq "no border, whatever FZF_DEFAULT_OPTS says" "--no-border" "$(log fzf.args | grep -x -- --no-border)"
+check_eq "default layout, whatever FZF_DEFAULT_OPTS says" "default" "$(log fzf.args | grep -x -A1 -- --layout | tail -1)"
+
 # Without open, use xdg-open, then $BROWSER.
 mv "$FAKE/open" "$TMP/open"
 run "$two" FAKE_FZF_OUTPUT='\nhttps://a.example.com\n'

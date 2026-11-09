@@ -81,6 +81,8 @@ The command that copies text to the clipboard, such as `"pbcopy"`.
 
 Extra flags for fzf. For example, `"--no-wrap"` stops long URLs from wrapping.
 
+The popup is sized to fit the picker, so the picker turns off the border and uses the default layout, whatever `FZF_DEFAULT_OPTS` says. A border adds two rows and two columns that the pane doesn't count, and it hides the URL list. If you set `--border`, `--margin`, or `--padding` here, the list can be cut off.
+
 **Default**: none.
 
 ### `max_width` and `max_height`
